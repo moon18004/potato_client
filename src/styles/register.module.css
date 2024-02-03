@@ -1,0 +1,19 @@
+.sendCode {
+  /* font-size: 30px; */
+  cursor: pointer;
+}
+.verify{
+	cursor:pointer;
+}
+.changeEmail{
+	cursor:pointer;
+}
+.visible{
+	display:block;
+}
+.unvisible{
+	display: none;
+}
+.dflex{
+	margin-left: 60px;
+}

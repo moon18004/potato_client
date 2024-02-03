@@ -5,13 +5,14 @@ import './App.css';
 import Root from './pages/Root';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
-import Information from './pages/information';
+import Information from './pages/Information';
 import Course from './pages/Course';
 import Community from './pages/Community';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import Register from './pages/Register';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/information', element: <Information /> },
       { path: '/course', element: <Course /> },
       { path: '/community', element: <Community /> },
+      { path: '/register', element: <Register /> },
     ],
   },
 ]);
