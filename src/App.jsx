@@ -13,6 +13,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import Register from './pages/Register';
+import Login from './pages/Login';
+import { AuthContextProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
       { path: '/course', element: <Course /> },
       { path: '/community', element: <Community /> },
       { path: '/register', element: <Register /> },
+      { path: '/login', element: <Login /> },
     ],
   },
 ]);
@@ -34,8 +37,10 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}></RouterProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <AuthContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+        <ReactQueryDevtools initialIsOpen={true} />
+      </AuthContextProvider>
     </QueryClientProvider>
   );
 }

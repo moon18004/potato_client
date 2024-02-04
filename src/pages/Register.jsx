@@ -3,21 +3,23 @@ import styles from '../styles/register.module.css';
 import { useCountries } from 'use-react-countries';
 import { register, sendOTP, verifyOTP } from '../api/authClient';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuthContext } from '../context/AuthContext';
 export default function Register() {
   const [userInfo, setUserInfo] = useState({});
   const [code, setCode] = useState('');
   const [disabledEmail, setDisabledEmail] = useState(false);
-  const [verified, setVerified] = useState(false);
+  const [tokenPassed, settokenPassed] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
+  const [error, setError] = useState(null);
+  const {setVerified} = useAuthContext();
 
   const { countries } = useCountries();
 
   // useEffect(()=>{
-  // 	setVerified(false);
+  // 	settokenPassed(false);
   // 	setSentEmail(false);
   // }, [])
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
   countries.sort(function (comp1, comp2) {
     let comp1UC = comp1.name.toUpperCase();
@@ -49,34 +51,42 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(userInfo);
-		
-		const res = await register(userInfo);
-		if(!res.error){
-			navigate('/');
-		}
-			// navigate(`/`);
-		
-		
+
+    const res = await register(userInfo);
+    if (!res.error) {
+      setError(null);
+      setVerified(true)
+      navigate('/');
+    } else {
+      setError(res.message);
+    }
+    // navigate(`/`);
   };
-  const sendCode = async  (e) => {
+  const sendCode = async (e) => {
     console.log('send cdoe');
     const res = await sendOTP(userInfo.email);
-		if(!res.error){
-			setSentEmail(res);
-			setDisabledEmail(true);
-		}
-    
+    if (!res.error) {
+      setSentEmail(res);
+      setDisabledEmail(true);
+    }
   };
   const handleCode = (e) => {
     setCode(e.target.value);
   };
   const verifyCode = async (e) => {
-		const res = await verifyOTP(userInfo.email, code);
-		console.log(res);
-		if(!res.error){
-			setVerified(res);
-		}
-    
+    const res = await verifyOTP(userInfo.email, code);
+    console.log(res);
+    if (!res.error) {
+      settokenPassed(res);
+    }
+  };
+  const checkPwd = () => {
+    if (userInfo.password !== userInfo.confirmPwd) {
+      setError('Password & Confirm Password do not match.');
+      console.log(userInfo);
+    } else {
+      setError(null);
+    }
   };
 
   return (
@@ -99,7 +109,7 @@ export default function Register() {
           Send Verification Code
         </p>
 
-        <div className={`${sentEmail? styles.visible: styles.unvisible}`}>
+        <div className={`${sentEmail ? styles.visible : styles.unvisible}`}>
           <label htmlFor=''>
             Verification Code:
             <input
@@ -115,7 +125,7 @@ export default function Register() {
             Verify Code
           </p>
         </div>
-        <div className={verified ? styles.visible : styles.unvisible}>
+        <div className={tokenPassed ? styles.visible : styles.unvisible}>
           <label htmlFor=''>
             Password
             <input
@@ -125,6 +135,19 @@ export default function Register() {
               placeholder='password'
               required
               onChange={handleChange}
+              onBlur={checkPwd}
+            />
+          </label>
+          <label htmlFor=''>
+            Confirm Password
+            <input
+              type='password'
+              name='confirmPwd'
+              value={userInfo.confirmPwd ?? ''}
+              placeholder='Confirm password'
+              required
+              onChange={handleChange}
+              onBlur={checkPwd}
             />
           </label>
           <label htmlFor=''>
@@ -162,6 +185,7 @@ export default function Register() {
               </option>
             ))}
           </select>
+          {error && <p>{Array.isArray(error)? error[0] : error}</p>}
           <button>submit</button>
         </div>
       </form>

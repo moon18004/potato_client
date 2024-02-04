@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
+import { clearTokens } from '../api/authClient';
 export default function Navbar() {
+
+  const {verified, setUserVerified, setVerified} = useAuthContext();
+  console.log(verified);
+  setUserVerified();
+
+  // console.log(setUserVerified());
+  const handleLogout = () => {
+    const ans = confirm("Do you want to logout?")
+    if(ans){
+      clearTokens();
+      setVerified(false);
+    }
+  }
   return (
     <header>
       <div>
@@ -10,7 +25,9 @@ export default function Navbar() {
   			<Link to='/community'>community</Link>
       </div>
       <div>
-        <Link to='/register'>Register</Link>
+        {!verified && <Link to='/register'>Register</Link>}
+        {!verified && <Link to='/login'>Login</Link>}
+        {verified && <Link onClick={handleLogout}>Logout</Link>}
       </div>
     </header>
   );

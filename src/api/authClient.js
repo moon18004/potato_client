@@ -21,6 +21,46 @@ export async function verifyOTP(email, code){
 export async function register(userInfo){
 	const res = await axios.post(`${baseURL}auth/register/email`, {...userInfo}).then(res=> res.data).catch((error)=> error.response.data);
 	console.log(res);
+	if (res.accessToken){
+		localStorage.setItem('accessToken', res.accessToken);
+		localStorage.setItem('refreshToken', res.refreshToken);
+	}
 	return res
-
+}
+export async function verifyToken(){
+	const accessToken =localStorage.getItem('accessToken');
+	const headers ={
+		Authorization: `Bearer ${accessToken}`
+	}
+	return await axios.post(`${baseURL}auth/verify`, {}, {headers}).then(res=> res.data).catch(error=> error.response.data);
+}
+export async function refreshAccessToken(){
+	const refreshToken =localStorage.getItem('refreshToken');
+	const headers ={
+		Authorization: `Bearer ${refreshToken}`
+	}
+	// console.log(headers);
+	const res = await axios.post(`${baseURL}auth/token/access`, {}, {headers}).then(res=> res.data).catch(error=> error.response.data);
+	if(!res.error){
+		localStorage.setItem('accessToken', res.accessToken);
+		return true;
+	}else{
+		return false;
+	}
+}
+export async function clearTokens(){
+	localStorage.removeItem('accessToken');
+	localStorage.removeItem('refreshToken');
+}
+export async function login(token){
+	const headers ={
+		Authorization: `Basic ${token}`
+	}
+	const res = await axios.post(`${baseURL}auth/login/email`, {}, {headers}).then(res=> res.data).catch((error)=> error.response.data);
+	if(!res.error){
+		localStorage.setItem('accessToken', res.accessToken);
+		localStorage.setItem('refreshToken', res.refreshToken);
+		
+	}return res;
+	
 }
