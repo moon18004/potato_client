@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../styles/base.css';
 import styles from '../styles/register.module.css';
 import { useCountries } from 'use-react-countries';
 import { register, sendOTP, verifyOTP } from '../api/authClient';

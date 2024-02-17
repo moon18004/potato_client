@@ -3,6 +3,9 @@ import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
+// responsive view
+import MediaQuery from 'react-responsive';
+
 export default function Root() {
   const { user, setUser, verified, setUserVerified, setVerified } =
     useAuthContext();
@@ -16,7 +19,8 @@ export default function Root() {
 
   return (
     <>
-      <Navbar
+      <MediaQuery minWidth={768}>
+        <Navbar
         auth={{
           user,
           setUser,
@@ -32,6 +36,25 @@ export default function Root() {
           setUserVerified,
           setVerified,
         }}></Outlet>
+      </MediaQuery>
+      <MediaQuery maxWidth={767}>
+        <Outlet
+        context={{
+          user,
+          setUser,
+          verified,
+          setUserVerified,
+          setVerified,
+        }}></Outlet>
+        <Navbar
+        auth={{
+          user,
+          setUser,
+          verified,
+          setUserVerified,
+          setVerified,
+        }}></Navbar>
+      </MediaQuery>
     </>
   );
 }
