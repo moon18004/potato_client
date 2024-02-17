@@ -4,6 +4,7 @@ import { useCountries } from 'use-react-countries';
 import { register, sendOTP, verifyOTP } from '../api/authClient';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import { useOutletContext } from "react-router-dom";
 export default function Register() {
   const [userInfo, setUserInfo] = useState({});
   const [code, setCode] = useState('');
@@ -12,6 +13,7 @@ export default function Register() {
   const [sentEmail, setSentEmail] = useState(false);
   const [error, setError] = useState(null);
   const {setVerified} = useAuthContext();
+  // const [setVerified] = useOutletContext();
 
   const { countries } = useCountries();
 
