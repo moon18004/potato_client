@@ -15,6 +15,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import { AuthContextProvider } from './context/AuthContext';
+import PostCommunity from './pages/PostCommunity';
+import ProtectedRoute from './pages/ProtectedRoute';
+import CommunityPost from './components/CommunityPost';
+import CommunityDetail from './pages/CommunityDetail';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,16 @@ const router = createBrowserRouter([
       { path: '/information', element: <Information /> },
       { path: '/course', element: <Course /> },
       { path: '/community', element: <Community /> },
+      
+      {
+        path: '/community/post',
+        element: (
+          <ProtectedRoute>
+            <PostCommunity />
+          </ProtectedRoute>
+        ),
+      },
+      { path: '/communityPost/:id', element: <CommunityDetail /> },
       { path: '/register', element: <Register /> },
       { path: '/login', element: <Login /> },
     ],

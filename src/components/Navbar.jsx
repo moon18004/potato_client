@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 import { clearTokens } from '../api/authClient';
-export default function Navbar() {
+export default function Navbar({auth}) {
 
-  const {verified, setUserVerified, setVerified} = useAuthContext();
-  console.log(verified);
-  setUserVerified();
+  // const {user, setUser, verified,setUserVerified, setVerified} = useAuthContext();
+  const {user, setUser, verified,setUserVerified, setVerified} = auth;
+  // console.log(verified);
+  // console.log(verified);
+  // useEffect(()=>{
+  //   setUserVerified();
+  // }, [])
+  
 
   // console.log(setUserVerified());
   const handleLogout = () => {
@@ -14,6 +19,7 @@ export default function Navbar() {
     if(ans){
       clearTokens();
       setVerified(false);
+      setUser({})
     }
   }
   return (
