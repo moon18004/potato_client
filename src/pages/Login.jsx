@@ -3,11 +3,13 @@ import '../styles/base.css';
 import { login } from '../api/authClient';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import { useOutletContext } from "react-router-dom";
 
 export default function Login() {
   const [user, setUser] = useState({});
 	const navigate = useNavigate();
-	const {verified, setUserVerified, setVerified} = useAuthContext();
+	const {verified, setVerified} = useAuthContext();
+  // const [verified, setVerified] = useOutletContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +23,7 @@ export default function Login() {
 		const res = await login(encoded);
 		if(!res.error){
 			setVerified(true);
+      // console.log(verified);
 			navigate('/');
 		}
 		else{

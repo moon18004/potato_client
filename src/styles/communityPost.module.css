@@ -1,0 +1,33 @@
+li{
+	list-style:none;
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 10px;
+	cursor:pointer;
+}
+p{
+	margin: 2px 4px;
+}
+h3{
+	margin: 4px 2px;
+}
+.user{
+	display: flex;
+	align-items: center;
+}
+
+.userInfo{
+	display: flex;
+	align-items:center;
+	justify-content: space-between;
+}
+.country{
+	width:30px;
+	height: 100%;
+}
+.info{
+	display: flex;
+	justify-content: space-between;
+}
+.info > div{
+	display: flex;
+}

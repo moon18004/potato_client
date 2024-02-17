@@ -1,8 +1,10 @@
 import React from 'react';
+
 import SelectBar from '../components/course/SelectBar';
 import NavBar from '../components/course/NavBar';
 import PostButton from '../components/course/PostButton';
 import PostBar from '../components/course/PostBar';
+import { useOutletContext } from 'react-router-dom';
 
 export default function Course() {
 	
@@ -25,4 +27,3 @@ export default function Course() {
 		</div>
 	);
 }
-

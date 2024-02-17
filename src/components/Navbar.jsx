@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 import { clearTokens } from '../api/authClient';
@@ -15,10 +16,17 @@ import ForumIcon from '@mui/icons-material/Forum';
 // responsive view
 import MediaQuery from 'react-responsive';
 
-export default function Navbar() {
-  const {verified, setUserVerified, setVerified} = useAuthContext();
-  console.log(verified);
-  setUserVerified();
+export default function Navbar({auth}) {
+
+  // const {user, setUser, verified,setUserVerified, setVerified} = useAuthContext();
+  const {user, setUser, verified,setUserVerified, setVerified} = auth;
+  // console.log(verified);
+  // console.log(verified);
+  // useEffect(()=>{
+  //   setUserVerified();
+  // }, [])
+  
+
 
   // console.log(setUserVerified());
   const handleLogout = () => {
@@ -26,6 +34,7 @@ export default function Navbar() {
     if(ans){
       clearTokens();
       setVerified(false);
+      setUser({})
     }
   }
 
