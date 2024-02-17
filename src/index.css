@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* base */
+h1{
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style:oblique;
+  font-variation-settings:
+  "wdth" 900;
+}
+
+p{
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* font ex */
+  /* font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "width" 100; */
+
+
+/* mobile view */
+
+@media screen and (max-width: 767px) {
+  p {
+    display: grid;
+  }
+  .course {
+    width: 767px;
+  }
+  
+}
+
+/* tablet view */
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+/* pc view */
+
+@media screen and (min-width: 1024px) {
+  .course {
+    width: 767px;
+    margin: auto;
+  }
+}
+
