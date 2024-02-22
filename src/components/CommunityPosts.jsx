@@ -6,7 +6,7 @@ import CommunityPost from './CommunityPost';
 export default function CommunityPosts() {
 	
 	const {communityQuery:{isLoading, error, data:posts}} = useCommunity();
-	// console.log(posts);
+	// console.log(posts);.
 	return (
 		<>
 			{isLoading && <p>Loading...</p> }

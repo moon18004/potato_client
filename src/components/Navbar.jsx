@@ -65,18 +65,29 @@ export default function Navbar({auth}) {
           value={event}
           onChange={handleChange}
         >
-          <Link to='/'>
-            <BottomNavigationAction label="Home" value='home' icon={<HomeIcon />} />
-          </Link>
-          <Link to='/information'>
-            <BottomNavigationAction label="Information" value='info' icon={<InfoIcon />} />
-          </Link>
-          <Link to='/course'>
-            <BottomNavigationAction label="Course" icon={<SchoolIcon />} />
-          </Link>
-          <Link to='/community'>
-            <BottomNavigationAction label="community" icon={<ForumIcon />} />
-          </Link>
+          
+          <BottomNavigationAction 
+            label="Home" 
+            value='home' 
+            icon={<HomeIcon />} 
+            component={Link}
+            to="/" />
+          <BottomNavigationAction 
+            label="Information" 
+            value='info' 
+            icon={<InfoIcon />} 
+            component={Link}
+            to="/information" /> 
+          <BottomNavigationAction 
+            label="Course" 
+            icon={<SchoolIcon />} 
+            component={Link}
+            to="/course" /> 
+          <BottomNavigationAction 
+            label="community" 
+            icon={<ForumIcon />} 
+            component={Link}
+            to="/community" /> 
         </BottomNavigation>
 
         <div>

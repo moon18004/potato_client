@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from '../../styles/selectBar.module.css'
 import { FormControl,InputLabel, Select, MenuItem } from "@mui/material"
 
 
@@ -7,8 +8,9 @@ function SelectBar(){
   let age = 20;
   // handleChange
   return (
-    <FormControl>
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+    <div className={styles.bar}>
+      <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">Subject</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
@@ -21,6 +23,7 @@ function SelectBar(){
         <MenuItem value={30}>Thirty</MenuItem>
       </Select>
     </FormControl>
+    </div>
   )
 }
 

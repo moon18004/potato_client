@@ -1,10 +1,12 @@
 import React from 'react';
-
 import SelectBar from '../components/course/SelectBar';
-import NavBar from '../components/course/NavBar';
 import PostButton from '../components/course/PostButton';
-import PostBar from '../components/course/PostBar';
 import { useOutletContext } from 'react-router-dom';
+import Post from '../components/course/Post';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { Link } from 'react-router-dom';
+
+import styles from '../styles/course.module.css'
 
 export default function Course() {
 	
@@ -13,16 +15,10 @@ export default function Course() {
 			Course
 			<div>
 				<SelectBar></SelectBar>
-				<p>name</p>
-				<p>name</p>
-				<h1>abcd</h1>
-				<h2>h2</h2>
-				<h3>h3</h3>
-				<h4>h4</h4>
-				<div>div</div>
-				<PostBar></PostBar>
-				<PostButton></PostButton>
-				<NavBar></NavBar>
+				<Post></Post>
+				<Link to='/'>
+					<AddCircleRoundedIcon className={styles.add}/>
+				</Link>
 			</div>
 		</div>
 	);
