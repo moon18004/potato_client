@@ -1,0 +1,10 @@
+.slick-track{
+	width: 100%;
+}
+
+.selected {
+	background-color: lightgray;
+}
+.none{
+	background-color: transparent;
+}

@@ -9,6 +9,10 @@ h1{
   font-variation-settings:
   "wdth" 900;
 }
+body{
+  margin:0;
+  padding-bottom: 80px;
+}
 
 p{
   font-family: "Archivo", sans-serif;

@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import styles from '../styles/community/postCommunity.module.css';
-import { postCommunity } from '../api/community';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useCommunity from '../hooks/useCommunity';
 
-export default function PostCommunity() {
-  const [post, setPost] = useState({ category: 'QUESTION' });
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const {addPost} = useCommunity();
-  const handleChange = (e) => {
+export default function CommunityEdit() {
+	const{state: {post}} = useLocation();
+	const [ePost, setEPost] = useState({category: post.category, title: post.title, content: post.content})
+	const [error, setError] = useState(null);
+	const navigate = useNavigate();
+	const {updatePost} = useCommunity();
+	console.log(ePost);
+	const handleChange = (e) => {
     const { name, value } = e.target;
-    setPost((po) => ({ ...po, [name]: value }));
-    // console.log(post);
+    setEPost((po) => ({ ...po, [name]: value }));
+    console.log(ePost);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(post);
 
     // const res = await postCommunity(post);
-    const res = await addPost.mutateAsync({post})
+    const res = await updatePost.mutateAsync({id: post.id, ePost})
     console.log(res);
     if(res.error){
       setError(res.message)
@@ -28,15 +28,14 @@ export default function PostCommunity() {
       navigate('/community');
     }
   };
-
-  return (
-    <section>
+	return (
+		<section>
       Write
       <form onSubmit={handleSubmit}>
         <label htmlFor=''>Category</label>
         <select
           name='category'
-          value={post.category}
+          value={ePost.category}
           onChange={handleChange}
           id=''>
           <option value='QUESTION'>Question</option>
@@ -50,16 +49,16 @@ export default function PostCommunity() {
           <input
             type='text'
             name='title'
-            value={post.title ?? ''}
+            value={ePost.title ?? ''}
             placeholder='title'
             required
             onChange={handleChange}
           />
         </label>
         <textarea
-          className={styles.content}
+          // className={styles.content}
           onChange={handleChange}
-          value={post.content ?? ''}
+          value={ePost.content ?? ''}
           name='content'
           rows={5}
           cols={33}></textarea>
@@ -67,5 +66,6 @@ export default function PostCommunity() {
         {error && <p>{Array.isArray(error) ? error[0] : error}</p>}
       </form>
     </section>
-  );
+	);
 }
+

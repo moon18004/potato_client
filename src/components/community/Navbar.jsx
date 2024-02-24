@@ -1,10 +1,9 @@
-
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
-import { clearTokens } from '../api/authClient';
+import { useAuthContext } from '../../context/AuthContext';
+import { clearTokens } from '../../api/authClient';
 
-import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 // icons
@@ -16,27 +15,24 @@ import ForumIcon from '@mui/icons-material/Forum';
 // responsive view
 import MediaQuery from 'react-responsive';
 
-export default function Navbar({auth}) {
-
+export default function Navbar({ auth }) {
   // const {user, setUser, verified,setUserVerified, setVerified} = useAuthContext();
-  const {user, setUser, verified,setUserVerified, setVerified} = auth;
+  const { user, setUser, verified, setUserVerified, setVerified } = auth;
   // console.log(verified);
   // console.log(verified);
   // useEffect(()=>{
   //   setUserVerified();
   // }, [])
-  
-
 
   // console.log(setUserVerified());
   const handleLogout = () => {
-    const ans = confirm("Do you want to logout?")
-    if(ans){
+    const ans = confirm('Do you want to logout?');
+    if (ans) {
       clearTokens();
       setVerified(false);
-      setUser({})
+      setUser({});
     }
-  }
+  };
 
   const [event, setEvent] = useState(false);
   const handleChange = (event, newValue) => {
@@ -45,7 +41,7 @@ export default function Navbar({auth}) {
 
   return (
     <header>
-      <MediaQuery minWidth={1024} >
+      <MediaQuery minWidth={1024}>
         <div>
           <Link to='/'>Home</Link>
           <Link to='/information'>information</Link>
@@ -58,24 +54,28 @@ export default function Navbar({auth}) {
           {verified && <Link onClick={handleLogout}>Logout</Link>}
         </div>
       </MediaQuery>
-      
+
       <MediaQuery maxWidth={1023}>
-        <BottomNavigation
-          showLabels
-          value={event}
-          onChange={handleChange}
-        >
+        <BottomNavigation showLabels value={event} onChange={handleChange}>
           <Link to='/'>
-            <BottomNavigationAction label="Home" value='home' icon={<HomeIcon />} />
+            <BottomNavigationAction
+              label='Home'
+              value='home'
+              icon={<HomeIcon />}
+            />
           </Link>
           <Link to='/information'>
-            <BottomNavigationAction label="Information" value='info' icon={<InfoIcon />} />
+            <BottomNavigationAction
+              label='Information'
+              value='info'
+              icon={<InfoIcon />}
+            />
           </Link>
           <Link to='/course'>
-            <BottomNavigationAction label="Course" icon={<SchoolIcon />} />
+            <BottomNavigationAction label='Course' icon={<SchoolIcon />} />
           </Link>
           <Link to='/community'>
-            <BottomNavigationAction label="community" icon={<ForumIcon />} />
+            <BottomNavigationAction label='community' icon={<ForumIcon />} />
           </Link>
         </BottomNavigation>
 
@@ -85,7 +85,6 @@ export default function Navbar({auth}) {
           {verified && <Link onClick={handleLogout}>Logout</Link>}
         </div>
       </MediaQuery>
-
     </header>
   );
 }

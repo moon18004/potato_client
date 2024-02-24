@@ -17,8 +17,9 @@ import Login from './pages/Login';
 import { AuthContextProvider } from './context/AuthContext';
 import PostCommunity from './pages/PostCommunity';
 import ProtectedRoute from './pages/ProtectedRoute';
-import CommunityPost from './components/CommunityPost';
+import CommunityPost from './components/community/CommunityPost';
 import CommunityDetail from './pages/CommunityDetail';
+import CommunityEdit from './pages/CommunityEdit';
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,20 @@ const router = createBrowserRouter([
       { path: '/information', element: <Information /> },
       { path: '/course', element: <Course /> },
       { path: '/community', element: <Community /> },
-      
+
       {
         path: '/community/post',
         element: (
           <ProtectedRoute>
             <PostCommunity />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/community/edit/:id',
+        element: (
+          <ProtectedRoute>
+            <CommunityEdit />
           </ProtectedRoute>
         ),
       },

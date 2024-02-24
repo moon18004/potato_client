@@ -1,0 +1,34 @@
+.selected {
+	background-color: lightgray;
+}
+.none{
+	background-color: transparent;
+}
+.slider{
+	/* position:fixed;
+	bottom: 110px; */
+	
+	z-index: 1;
+	margin: 0px 20px;
+	margin-top: 10px;
+	/* background-color: lightgray; */
+}
+ul{
+	margin-top: 0;
+	position:relative;
+	/* z-index:1; */
+}
+.write{
+	margin-top: 10px;
+	margin-left: 20px;
+	color:white;
+	background-color: royalblue;
+	padding: 6px 14px;
+	border-radius: 4px;
+	align-items: center;
+	/* font-size: 18px; */
+}
+.pen{
+	font-size: 12px;
+	padding-right:6px;
+}

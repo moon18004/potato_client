@@ -1,0 +1,87 @@
+.postContainer {
+  /* width: 100%;
+	display: flex; */
+}
+.dropdown {
+  float: right;
+}
+.postBox {
+  list-style: none;
+  border-bottom: 1px solid lightgray;
+  padding: 16px 8px;
+
+  margin-bottom: 10px;
+  /* margin-right: 60px; */
+  cursor: pointer;
+}
+p {
+  margin: 2px 4px;
+  font-size: 13px;
+}
+.ann {
+  border: 1px solid lightgray;
+	border-radius: 4px;
+}
+.norm{
+	background-color : #f1f6fa;
+	border-radius: 4px;
+}
+.category{
+	padding: 2px 4px;
+	margin: 0;
+	line-height: 16px;
+}
+.title {
+  margin: 8px 2px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: normal;
+}
+.title:hover{
+	color: #3b80b1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.country {
+  width: 20px;
+  border: 1px solid lightgray;
+  height: 100%;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+.info > div {
+  display: flex;
+	align-items: center;
+}
+.counts {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+ul {
+  padding-left: 0;
+}
+.dropdownBtn {
+  border: none;
+}
+.option:hover {
+  background-color: lightgray;
+}
+.icons{
+	color: #575d65;
+}
+.fire{
+	color: crimson;
+	margin-right: 4px;
+}
