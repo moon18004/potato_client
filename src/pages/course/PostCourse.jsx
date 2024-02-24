@@ -1,14 +1,11 @@
-import * as React from 'react';
-import styles from '../../styles/selectBar.module.css'
+import { postCourse } from "../../api/course";
 import { FormControl,InputLabel, Select, MenuItem } from "@mui/material"
 
-
-
-function SelectBar(){
+function PostCourse(){
   let age = 20;
-  // handleChange
-  return (
-    <div className={styles.bar}>
+  return(
+    <>
+      <h1>Course Post</h1>
       <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">Subject</InputLabel>
       <Select
@@ -23,8 +20,8 @@ function SelectBar(){
         <MenuItem value={30}>Thirty</MenuItem>
       </Select>
     </FormControl>
-    </div>
+    </>
   )
 }
 
-export default SelectBar
+export default PostCourse;

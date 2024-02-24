@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
-
+:root{
+  --color-ivory: #d3bdb0;
+  --color-dark_ivory: #c1ae9f;
+  --color-khaki: #89937c;
+  --color-redbrown: #d3bdb0;
+  --color-purple: #69385c;
+}
 /* base */
 h1{
   font-family: "Archivo", sans-serif;
@@ -33,13 +39,10 @@ p{
 /* mobile view */
 
 @media screen and (max-width: 767px) {
-  p {
-    display: grid;
+
+  *{
+    
   }
-  .course {
-    width: 767px;
-  }
-  
 }
 
 /* tablet view */
