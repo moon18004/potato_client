@@ -4,20 +4,22 @@ import styles from '../../styles/singlePostCourse.module.css'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 
-function Post(){
+import Badge from '@mui/material/Badge';
+
+function Post({key, post}){
 
   return(
-    <>
+    <div className={styles.post}>
       <div className={styles.postHead}>
-        <h4>CSE123</h4>
+        <h4>{post.class_code}</h4>
         <div>
-          <p>2023.02.21</p>
-          <p>Nick Name</p>
+          <p>{post.createdAt}</p>
+          <p>{post.nickname}</p>
         </div>
       </div>
       <dl>
         <dt>content1</dt>
-        <dd>answer1</dd>
+        <dd>answer1answer1answer1answer1answer1answer1answer1answer1answer1answer1</dd>
         <dt>content1</dt>
         <dd>answer1</dd>
         <dt>content1</dt>
@@ -25,9 +27,13 @@ function Post(){
         <dt>content1</dt>
         <dd>answer1</dd>
       </dl>
-      <ThumbUpIcon />
-      <CommentIcon />
-    </>
+      <Badge badgeContent={post.id}>
+        <ThumbUpIcon />
+      </Badge>
+      <Badge badgeContent={post.id}>
+        <CommentIcon />
+      </Badge>
+    </div>
   )
 }
 export default Post;

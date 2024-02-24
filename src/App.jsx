@@ -6,7 +6,7 @@ import Root from './pages/Root';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import Information from './pages/Information';
-import Course from './pages/Course';
+import Course from './pages/course/Course';
 import Community from './pages/Community';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -19,6 +19,7 @@ import PostCommunity from './pages/PostCommunity';
 import ProtectedRoute from './pages/ProtectedRoute';
 import CommunityPost from './components/CommunityPost';
 import CommunityDetail from './pages/CommunityDetail';
+import PostCourse from './pages/course/PostCourse';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: '/information', element: <Information /> },
       { path: '/course', element: <Course /> },
+      { path: '/course/post', element: <PostCourse />},
       { path: '/community', element: <Community /> },
-      
       {
         path: '/community/post',
         element: (
