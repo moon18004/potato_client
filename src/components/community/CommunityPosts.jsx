@@ -66,7 +66,7 @@ export default function CommunityPosts() {
       </div>
       {verified && <Link className={styles.write} to='/community/post'><FaPen className={styles.pen}/>Write</Link>}
       <ul>
-        {crucials &&
+        {Array.isArray(crucials) &&
           crucials.map((post) => {
             return <CommunityPost key={post.id} post={post} />;
           })}
