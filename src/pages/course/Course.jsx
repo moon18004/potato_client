@@ -14,7 +14,7 @@ export default function Course() {
 		<div className='course'>
 			Course
 			<div>
-				<SelectBar></SelectBar>
+				{/* <SelectBar></SelectBar> */}
 				<PostList></PostList>
 				<Link to='/course/post'>
 					<AddCircleRoundedIcon className={styles.add}/>

@@ -7,6 +7,7 @@ export async function postCourse(post) {
 	const headers = {
 		Authorization: `Bearer ${accessToken}`,
 	};
+	console.log(post);
 	const res = await axios
 		.post(`${baseURL}courses`, { ...post }, { headers })
 		.then((res) => res.data)

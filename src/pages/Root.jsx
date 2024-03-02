@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Navbar from '../components/community/Navbar';
+import Navbar from '../components/public/Navbar';
 import { Outlet } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 

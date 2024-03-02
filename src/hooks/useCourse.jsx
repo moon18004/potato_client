@@ -1,5 +1,5 @@
-import { getCourse } from "../api/course";
-import { useQuery } from "@tanstack/react-query";
+import { getCourse, postCourse } from "../api/course";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 function useCourse(){
   const courseQuery = useQuery({
@@ -7,7 +7,11 @@ function useCourse(){
     queryFn: () => getCourse(),
   });
 
-  return {courseQuery};
+  const addCourse = useMutation ({
+    mutationFn: ({post}) => postCourse(post),
+  });
+
+  return {courseQuery, addCourse};
 }
 
 export default useCourse;
