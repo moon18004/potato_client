@@ -22,7 +22,7 @@ export default function ProtectedRoute({children}) {
 		return <Navigate to = '/' replace />
 	}
 	// setUserVerified();
-	console.log(verified);
+	// console.log(verified);
 
 	return children
 }

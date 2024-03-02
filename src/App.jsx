@@ -21,6 +21,7 @@ import CommunityPost from './components/community/CommunityPost';
 import CommunityDetail from './pages/CommunityDetail';
 import CommunityEdit from './pages/CommunityEdit';
 import PostCourse from './pages/course/PostCourse';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
       { path: '/communityPost/:id', element: <CommunityDetail /> },
       { path: '/register', element: <Register /> },
       { path: '/login', element: <Login /> },
+      { path: '/profile', element: (
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      )}
     ],
   },
 ]);
