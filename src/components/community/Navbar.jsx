@@ -52,6 +52,7 @@ export default function Navbar({ auth }) {
           {!verified && <Link to='/register'>Register</Link>}
           {!verified && <Link to='/login'>Login</Link>}
           {verified && <Link onClick={handleLogout}>Logout</Link>}
+          {verified && <Link to='/profile'>Profile</Link>}
         </div>
       </MediaQuery>
 
@@ -90,6 +91,7 @@ export default function Navbar({ auth }) {
           {!verified && <Link to='/register'>Register</Link>}
           {!verified && <Link to='/login'>Login</Link>}
           {verified && <Link onClick={handleLogout}>Logout</Link>}
+          {verified && <Link to='/profile'>Profile</Link>}
         </div>
       </MediaQuery>
     </header>
