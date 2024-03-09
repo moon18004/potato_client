@@ -29,7 +29,7 @@ export function AuthContextProvider({children}){
 	const setUserVerified = async () => {
 		const res = await verifyToken();
 		// console.log(res);
-		
+		// console.log(res);
 		// console.log(res);
 		if (res.email){
 			setVerified(true);

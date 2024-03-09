@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {  useNavigate , useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from '../styles/community/communityDetail.module.css';
 import { useParams } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
@@ -8,18 +8,49 @@ import useCommunity from '../hooks/useCommunity';
 import useCommunityDetail from '../hooks/useCommunityDetail';
 import { Link } from 'react-router-dom';
 import { increaseView } from '../api/community';
+import TextField from '@mui/material/TextField';
+import useCommunityComments from '../hooks/useCommunityComments';
+import Comments from '../components/community/Comments';
 
 export default function CommunityDetail() {
   const { id } = useParams();
   const { user, verified, setVerified } = useOutletContext();
   const { deletePost } = useCommunity();
   const navigate = useNavigate();
+  const [comment, setComment] = useState({});
+  console.log(user);
+
+  const {
+    postQuery: { isLoading, error, data: post },
+    
+  } = useCommunityDetail(id);
+
+  const {addComment} = useCommunityComments(id);
+
+
+  const handleComment = (e) => {
+    const { name, value } = e.target;
+    setComment({ [name]: value });
+    
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await addComment.mutateAsync({comment});
+    console.log(res);
+    if(res.error){
+      console.log(res.message);
+    }
+    else{
+      setComment({content: ''})
+    }
+    
+  };
   // console.log(user);
 
   // const {author, category, createdAt, viewCount, title, content, likeCount} = getCommunityById(id);
-  const {
-    postQuery: { isLoading, error, data: post },
-  } = useCommunityDetail(id);
+  
   // console.log(post);
 
   useEffect(() => {
@@ -28,28 +59,27 @@ export default function CommunityDetail() {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const ans = confirm("Do you want to delete this post?")
-    if (ans){
+    const ans = confirm('Do you want to delete this post?');
+    if (ans) {
       const res = await deletePost.mutateAsync(id);
       // console.log(res);
-      if(res.error){
+      if (res.error) {
         alert(res.message);
-      }
-      else{
-        navigate('/community')
+      } else {
+        navigate('/community');
       }
     }
-  }
-  const handleEdit = (e) =>{
+  };
+  const handleEdit = (e) => {
     e.preventDefault();
     // console.log(post.author.email);
     // console.log(user);
-    if(user.email !== post.author.email){
+    if (user.email !== post.author.email) {
       return;
     }
     // console.log('edit');
-    navigate(`/community/edit/${id}`, {state: {post}})
-  }
+    navigate(`/community/edit/${id}`, { state: { post } });
+  };
   // console.log(user);
 
   // const {author, category, createdAt, viewCount, title, content, likeCount} = post
@@ -89,6 +119,16 @@ export default function CommunityDetail() {
           <button onClick={handleEdit}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
         </div> */}
+      <form onSubmit={handleSubmit}>
+        <textarea
+          onChange={handleComment}
+          value={comment.content?? ''}
+          name='content'
+          cols='80'
+          rows='4'></textarea>
+        <button>Write</button>
+      </form>
+      <Comments id={id}/>
     </>
   );
 }

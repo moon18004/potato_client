@@ -7,7 +7,7 @@ import { useOutletContext } from "react-router-dom";
 export default function Login() {
   const [user, setUser] = useState({});
 	const navigate = useNavigate();
-	const {verified, setVerified} = useAuthContext();
+	const {verified, setVerified, setUserVerified} = useAuthContext();
   // const [verified, setVerified] = useOutletContext();
 
   const handleChange = (e) => {
@@ -21,7 +21,8 @@ export default function Login() {
     const encoded = btoa(token);
 		const res = await login(encoded);
 		if(!res.error){
-			setVerified(true);
+			// setVerified(true);
+      setUserVerified();
       // console.log(verified);
 			navigate('/');
 		}
