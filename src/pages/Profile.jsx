@@ -11,7 +11,7 @@ export default function Profile() {
     nickname: '',
     fullName: '',
     country: '',
-    countryUrl: '',
+    countryUrl: ''
   });
   const [pwd, setPwd] = useState({
     currentPwd: '',
@@ -23,10 +23,10 @@ export default function Profile() {
   // console.log(userData);
   const { user, setVerified } = useAuthContext();
   const { countries } = useCountries();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
-	const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState(false);
   // console.log(user);
 
   const {
@@ -50,7 +50,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (userData) {
-			console.log(userData.country);
+      console.log(userData.country);
       setUserInfo((info) => ({
         ...info,
         email: userData.email || info.email,
@@ -118,7 +118,7 @@ export default function Profile() {
   const submitPwd = async (e) => {
     e.preventDefault();
     const res = await updateUser.mutateAsync({ email: user.email, pwd });
-		if (!res.error) {
+    if (!res.error) {
       setError(null);
       setVerified(true);
       // navigate('/');
@@ -183,9 +183,8 @@ export default function Profile() {
               onChange={handleChange}
             />
           </label>
-					
+
           <select name='countries' id='' onChange={handleChange}>
-						
             <option key={userInfo.country ?? ''} value=''>
               {/* {userInfo.country ? userInfo.country : userData.country} */}
               --Please choose your country
@@ -194,7 +193,7 @@ export default function Profile() {
               <option
                 key={name}
                 value={JSON.stringify({ name, countryUrl: flags.png })}
-								selected = {name === userInfo.country ? true : false}>
+                selected={name === userInfo.country ? true : false}>
                 {name}
               </option>
             ))}
