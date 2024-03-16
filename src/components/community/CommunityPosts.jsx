@@ -86,6 +86,7 @@ export default function CommunityPosts() {
             return <CommunityPost key={post.id} post={post} />;
           })}
       </ul>
+      
     </>
   );
 }

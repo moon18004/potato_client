@@ -17,3 +17,6 @@
 .data{
 	display: flex;
 }
+.comment{
+	margin-top: 40px;
+}

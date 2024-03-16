@@ -3,6 +3,8 @@ import { useAuthContext } from '../context/AuthContext';
 import { useCountries } from 'use-react-countries';
 import { useNavigate } from 'react-router-dom';
 import { editUser, getUser, register } from '../api/authClient';
+import styles from '../styles/profile/profile.module.css';
+
 import useAuth from '../hooks/useAuth';
 
 export default function Profile() {
@@ -23,10 +25,10 @@ export default function Profile() {
   // console.log(userData);
   const { user, setVerified } = useAuthContext();
   const { countries } = useCountries();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
-	const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState(false);
   // console.log(user);
 
   const {
@@ -50,7 +52,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (userData) {
-			console.log(userData.country);
+      console.log(userData.country);
       setUserInfo((info) => ({
         ...info,
         email: userData.email || info.email,
@@ -118,7 +120,7 @@ export default function Profile() {
   const submitPwd = async (e) => {
     e.preventDefault();
     const res = await updateUser.mutateAsync({ email: user.email, pwd });
-		if (!res.error) {
+    if (!res.error) {
       setError(null);
       setVerified(true);
       // navigate('/');
@@ -142,11 +144,12 @@ export default function Profile() {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
+    <section className={styles.profile}>
+      <form className={styles.form1} onSubmit={handleSubmit}>
         <label htmlFor=''>
-          Email:
+          Email
           <input
+            className={styles.input}
             type='text'
             name='email'
             // value=''
@@ -158,10 +161,11 @@ export default function Profile() {
           />
         </label>
 
-        <div>
+        <div className={styles.info}>
           <label htmlFor=''>
             Nickname
             <input
+              className={styles.input}
               type='text'
               name='nickname'
               // value={userInfo.nickname ? userInfo.nickname : userData?.nickname}
@@ -174,6 +178,7 @@ export default function Profile() {
           <label htmlFor=''>
             Full Name
             <input
+              className={styles.input}
               type='text'
               name='fullName'
               // value={userInfo.fullName ? userInfo.fullName : userData?.fullName}
@@ -183,9 +188,12 @@ export default function Profile() {
               onChange={handleChange}
             />
           </label>
-					
-          <select name='countries' id='' onChange={handleChange}>
-						
+          <label htmlFor=''>Country</label>
+          <select
+            className={styles.input}
+            name='countries'
+            id=''
+            onChange={handleChange}>
             <option key={userInfo.country ?? ''} value=''>
               {/* {userInfo.country ? userInfo.country : userData.country} */}
               --Please choose your country
@@ -194,13 +202,14 @@ export default function Profile() {
               <option
                 key={name}
                 value={JSON.stringify({ name, countryUrl: flags.png })}
-								selected = {name === userInfo.country ? true : false}>
+                selected={name === userInfo.country ? true : false}>
                 {name}
               </option>
             ))}
           </select>
 
-          <button>Change</button>
+          <button
+          className={styles.btn}>Change</button>
           {error && <p>{Array.isArray(error) ? error[0] : error}</p>}
           {msg && <p>{msg}</p>}
         </div>
@@ -209,6 +218,7 @@ export default function Profile() {
         <label htmlFor=''>
           Current Password
           <input
+            className={styles.input}
             type='password'
             name='currentPwd'
             value={pwd.currentPwd ?? ''}
@@ -220,6 +230,7 @@ export default function Profile() {
         <label htmlFor=''>
           New Password
           <input
+            className={styles.input}
             type='password'
             name='password'
             value={pwd.password ?? ''}
@@ -232,6 +243,7 @@ export default function Profile() {
         <label htmlFor=''>
           Confirm New Password
           <input
+            className={styles.input}
             type='password'
             name='confirmPwd'
             value={pwd.confirmPwd ?? ''}
@@ -241,7 +253,9 @@ export default function Profile() {
             onBlur={checkPwd}
           />
         </label>
-        <button disabled={disabledBtn}>Password Change</button>
+        <button 
+        className={styles.btn}
+        disabled={disabledBtn}>Change Change</button>
         {pwdError && <p>{Array.isArray(pwdError) ? pwdError[0] : pwdError}</p>}
       </form>
     </section>

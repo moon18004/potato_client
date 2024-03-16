@@ -1,0 +1,15 @@
+.top{
+	display: flex;
+	justify-content: space-between;
+}
+.country{
+	width: 20px;
+	height: 10px;
+}
+.author{
+	display: flex;
+	align-items: center;
+}
+.data{
+	display: flex;
+}
