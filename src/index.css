@@ -26,7 +26,6 @@ p{
   font-weight: 100;
   font-style: normal;
 }
-
 /* font ex */
   /* font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
@@ -39,24 +38,33 @@ p{
 /* mobile view */
 
 @media screen and (max-width: 767px) {
-
-  *{
-    
+  .course,
+  .postCourse {
+    width: 767px;
+    margin: auto;
   }
 }
 
 /* tablet view */
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+  .course,
+  .postCourse {
+    width: 767px;
+    margin: auto;
+  }
   
 }
 
 /* pc view */
 
 @media screen and (min-width: 1024px) {
-  .course {
+  .course,
+  .postCourse {
     width: 767px;
     margin: auto;
   }
+
+  
 }
 

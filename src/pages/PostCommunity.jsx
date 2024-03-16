@@ -12,7 +12,7 @@ export default function PostCommunity() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPost((po) => ({ ...po, [name]: value }));
-    // console.log(post);
+    console.log(post);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();

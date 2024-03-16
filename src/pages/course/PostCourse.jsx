@@ -1,3 +1,4 @@
+import styles from '../../styles/course/postCourse.module.css'
 
 // api
 import { postCourse } from "../../api/course";
@@ -11,17 +12,18 @@ import SelectBar from "../../components/course/SelectBar";
 import CodeBox from "../../components/course/CodeBox";
 
 // material ui
-import { TextField, Box } from "@mui/material";
+import { TextField } from "@mui/material";
 import { SubjectCategory } from "../../components/course/SubjectCategory";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 function PostCourse(){
   const navigate = useNavigate();
   const {addCourse} = useCourse();
   const subjectData = SubjectCategory();
-
+  const baseContentName = ['Year/Semester', 'Professor']
   // useState
-  const [addContent, setAddContent] = useState([{ key: '1', val: '2' }, {key: '3', val: '4'}]);
+  const [addContent, setAddContent] = useState([{ key: '', val: '' }, {key: '', val: ''}]);
   const [subjectValue, setSubjectValue] = useState('');
   const [codeValue, setCodeValue] = useState('');
   const [baseContent, setBaseContent] = useState(['test1', 'test2']);
@@ -30,8 +32,8 @@ function PostCourse(){
     const updateContents = [
       ...addContent,
       {
-        key: 'new key',
-        val: 'new value'
+        key: '',
+        val: ''
       },
     ]
     setAddContent(updateContents)
@@ -94,35 +96,11 @@ function PostCourse(){
   };
 
   return(
-    <>
+    <div className={styles.postCourse}>
       <h1>Course Post</h1>
-      <Box>
-        <div class="firstParagraph">
-            <div class="firstSentence">
-              <p>Hi! This is Speaking Potato.</p>
-            {/* <img src="../images/potatos.png" alt="speakingPotato" style="width: 40px; height: 40px;"> */}
-            </div>
-            <p>We aim to share insightful and valuable information with everyone.</p>
-            <p>Below, you'll find guidance on good examples and content to avoid:</p>  
-            <ul>
-              <p class="good">Good Examples</p>
-              <li>Emphasize positive aspects of the professor's teaching.</li>
-              <li>Summarize the key points covered in the lecture.</li>
-              <li>Provide solutions for challenging parts and how to overcome them.</li>
-              <li>Highlight memorable moments from the lecture.</li>
-              <li>Recommend preparatory materials for better understanding of the lecture.</li>
-              <li>Suggest additional topics that could be covered to enhance learning.</li>
-            </ul>
-            <ul>
-              <p class="bad">Poor Examples</p>
-              <li>Negative criticism of professors or lectures.</li>
-              <li>Mention of inappropriate methods to improve grades.</li>
-            </ul>
-          </div>
-      </Box>
-
-      <form onSubmit={handleSubmit}>
-        <div style={{display: "flex"}}>
+      <hr />
+      <form onSubmit={handleSubmit} className={styles.submitForm}>
+        <div className={styles.code}>
           <SelectBar 
             label="select an option"
             value={subjectValue}
@@ -134,50 +112,66 @@ function PostCourse(){
             onChange={handleCode}
           />
         </div>
-        
+        <hr />
         {baseContent.map((content, index) => (
-          <TextField
-            required
-            key={index}
-            label={index}
-            placeholder="write down"
-            variant="filled"
-            onChange={(e)=>handleBaseContent(e, index)}
-            value={content}
-          />
+          <div key={index} className={styles.baseContent}>
+            <p>{baseContentName[index]}</p>
+            <TextField
+              required
+              key={index}
+              label={baseContentName[index]}
+              placeholder="write down"
+              variant="filled"
+              onChange={(e)=>handleBaseContent(e, index)}
+              value={content}
+              className={styles.baseTextField}
+            />
+          </div>
         ))}
-        
-        {addContent.map((pair, index) => (
-        <div key={index}>
-          <TextField
-            required
-            key={'key'+index}
-            label={index}
-            placeholder={`Enter key ${index + 1}`} 
-            variant="filled"
-            onChange={(e) => handleInputAddContent(index, e, 'key')} 
-            value={pair.key}
-            name={`key${index}`}
-          />
-          <TextField
-            required
-            key={'val'+index}
-            label={index}
-            placeholder={`Enter value ${index + 1}`} 
-            variant="filled"
-            onChange={(e) => handleInputAddContent(index, e, 'val')} 
-            value={pair.val}
-            name={`val${index}`}
-          />
-        </div>
-      ))}
 
-        <button type="button" onClick={handleAddContent}>Add new content</button>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={navigateToCourse}>Cancel</button>  
+        <hr />
+
+        {addContent.map((pair, index) => (
+          <div key={index} className={styles.addContents}>
+            <p>Free Q/A</p>
+            <TextField
+              required
+              key={'key'+index}
+              label={'Question'}
+              placeholder={`Enter key ${index + 1}`} 
+              variant="filled"
+              onChange={(e) => handleInputAddContent(index, e, 'key')} 
+              value={pair.key}
+              name={`key${index}`}
+              className={styles.addKey}
+            />
+            <div className={styles.space}></div>
+            <TextField
+              required
+              key={'val'+index}
+              label={'Answer'}
+              placeholder={`Enter value ${index + 1}`} 
+              variant="filled"
+              onChange={(e) => handleInputAddContent(index, e, 'val')} 
+              value={pair.val}
+              name={`val${index}`}
+              className={styles.addValue}
+            />
+            <div className={styles.space}></div>
+            <div className={styles.space}></div>
+          </div>
+        ))}
+        <div className={styles.addButtons}>
+          <p>Add new Q/A</p>
+          <button type="button" onClick={handleAddContent} className={styles.addButton}><AddBoxIcon></AddBoxIcon></button>
+        </div>
+        <hr />
+        <div className={styles.buttons}>
+          <button type="submit" className={styles.submit}>Submit</button>
+          <button type="button" onClick={navigateToCourse} className={styles.cancel}>Cancel</button>  
+        </div>
       </form>
-      
-    </>
+    </div>
   )
 }
 
