@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from '../../styles/selectBar.module.css'
+import styles from '../../styles/course/selectBar.module.css'
 import { FormControl,InputLabel, Select, MenuItem } from "@mui/material"
 
 
@@ -10,9 +10,11 @@ function SelectBar({ label, value, onChange, options }){
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Subject</InputLabel>
         <Select 
+          className={styles.selectBar}
           value={value} 
           onChange={onChange}
-          variant='filled'>
+          variant='filled'
+          >
           {options.map((option, index) => (
             <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
           ))}

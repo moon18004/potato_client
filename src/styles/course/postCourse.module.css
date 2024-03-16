@@ -1,0 +1,189 @@
+/* mobile view */
+
+@media screen and (max-width: 767px) {
+  .postCourse {
+    width: 375px;
+    margin: auto;
+  }
+  .submitForm {
+    margin: 0 auto;
+  }
+  .code {
+    display: flex;
+
+  }
+  .baseContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .baseTextField {
+    width: 300px;
+  }
+
+  .addContents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButton {
+    width: 300px;
+  }
+  p {
+    max-width: 200px;
+  }
+  .addKey, .addValue {
+    margin-bottom: 15px;
+    width: 300px;
+  }
+  .space {
+    padding: 5px;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto;
+  }
+  .cancel, .submit {
+    height: 40px;
+  }
+}
+
+/* tablet view */
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .postCourse {
+    width: 800px;
+    margin: auto;
+  }
+  .submitForm {
+    margin: 0 auto;
+  }
+  .code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .baseContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .baseTextField {
+    width: 700px;
+  }
+
+  .addContents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButton {
+    width: 700px;
+  }
+  p {
+    max-width: 200px;
+  }
+  .addKey, .addValue {
+    margin-bottom: 15px;
+    width: 700px;
+  }
+  .space {
+    padding: 5px;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto;
+  }
+  .cancel, .submit {
+    height: 40px;
+  }
+}
+
+/* pc view */
+
+@media screen and (min-width: 1024px) {
+  .postCourse {
+    width: 800px;
+    margin: auto;
+  }
+  .submitForm {
+    margin: 0 auto;
+  }
+  .code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .baseContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .baseTextField {
+    width: 700px;
+  }
+
+  .addContents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .addButton {
+    width: 700px;
+  }
+  p {
+    max-width: 200px;
+  }
+  .addKey, .addValue {
+    margin-bottom: 15px;
+    width: 700px;
+  }
+  .space {
+    padding: 5px;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto;
+  }
+  .cancel, .submit {
+    height: 40px;
+  }
+}

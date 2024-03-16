@@ -1,16 +1,9 @@
-import { Box, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
+import styles from '../../styles/course/codeBox.module.css'
 
 function CodeBox({value, onChange}){
   return(
-    // <Box
-    //   component="form"
-    //   sx={{
-    //     '& .MuiTextField-root': { m: 1, width: '25ch' },
-    //   }}
-    //   noValidate
-    //   autoComplete="off"
-    // >
-      <div>
+      <div className={styles.codeBox}>
         <TextField
           required
           id="outlined-required"
@@ -19,11 +12,9 @@ function CodeBox({value, onChange}){
           variant="filled"
           onChange={onChange}
           value={value}
+          className={styles.textField}
         />
-        
-      
       </div>
-    /* </Box> */
   )
 }
 

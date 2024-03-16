@@ -1,0 +1,44 @@
+.post {
+  background-color: palevioletred;
+}
+.postHead {
+  display: flex;
+  justify-content: space-between;
+}
+.code {
+  
+}
+
+.date {
+
+}
+
+.nick {
+
+}
+
+
+
+.post {
+  margin: 20px;
+  border-radius: 10px;
+}
+.classCode {
+  margin-left: 20px;
+}
+.datetime {
+  margin-right: 20px;
+}
+dl {
+  margin: 25px 25px;
+}
+.badges {
+  display: flex;
+  justify-content: right;
+  margin-right: 30px;
+  height: 35px;
+}
+.thumbsUp {
+  margin-right: 10px;
+}
+
