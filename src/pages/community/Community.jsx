@@ -1,8 +1,8 @@
 import React from 'react';
-import CommunityPosts from '../components/community/CommunityPosts';
+import CommunityPosts from '../../components/community/CommunityPosts';
 import { useOutletContext } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import styles from '../styles/community/community.module.css'
+import styles from '../../styles/community/community.module.css';
 
 export default function Community() {
   const { user, verified, setVerified } = useOutletContext();

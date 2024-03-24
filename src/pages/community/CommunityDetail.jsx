@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styles from '../styles/community/communityDetail.module.css';
+import styles from '../../styles/community/communityDetail.module.css';
 import { useParams } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 
-import useCommunity from '../hooks/useCommunity';
-import useCommunityDetail from '../hooks/useCommunityDetail';
+import useCommunity from '../../hooks/useCommunity';
+import useCommunityDetail from '../../hooks/useCommunityDetail';
 import { Link } from 'react-router-dom';
-import { increaseView } from '../api/community';
+import { increaseView } from '../../api/community';
 import TextField from '@mui/material/TextField';
-import useCommunityComments from '../hooks/useCommunityComments';
-import Comments from '../components/community/Comments';
+import useCommunityComments from '../../hooks/useCommunityComments';
+import Comments from '../../components/community/Comments';
 
 export default function CommunityDetail() {
   const { id } = useParams();
@@ -18,39 +18,34 @@ export default function CommunityDetail() {
   const { deletePost } = useCommunity();
   const navigate = useNavigate();
   const [comment, setComment] = useState({});
-  console.log(user);
+  // console.log(user);
 
   const {
     postQuery: { isLoading, error, data: post },
-    
   } = useCommunityDetail(id);
 
-  const {addComment} = useCommunityComments(id);
-
+  const { addComment } = useCommunityComments(id);
 
   const handleComment = (e) => {
     const { name, value } = e.target;
     setComment({ [name]: value });
-    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await addComment.mutateAsync({comment});
+    const res = await addComment.mutateAsync({ comment });
     console.log(res);
-    if(res.error){
+    if (res.error) {
       console.log(res.message);
+    } else {
+      setComment({ content: '' });
     }
-    else{
-      setComment({content: ''})
-    }
-    
   };
   // console.log(user);
 
   // const {author, category, createdAt, viewCount, title, content, likeCount} = getCommunityById(id);
-  
+
   // console.log(post);
 
   useEffect(() => {
@@ -122,13 +117,13 @@ export default function CommunityDetail() {
       <form onSubmit={handleSubmit}>
         <textarea
           onChange={handleComment}
-          value={comment.content?? ''}
+          value={comment.content ?? ''}
           name='content'
           cols='80'
           rows='4'></textarea>
         <button>Write</button>
       </form>
-      <Comments id={id}/>
+      <Comments id={id} />
     </>
   );
 }

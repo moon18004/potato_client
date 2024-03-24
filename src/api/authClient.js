@@ -3,9 +3,10 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-export async function sendOTP(email) {
+export async function sendOTP(email, forPwd=false) {
+  console.log(`${baseURL}mail/send${forPwd? '/true' : ''}`);
   const res = await axios
-    .post(`${baseURL}mail/send`, { email })
+    .post(`${baseURL}mail/send${forPwd? '/true' : '/false'}`, { email })
     .then((res) => res.data)
     .catch((error) => error.response.data);
   // .then(console.log).catch((error) => console.log(error));
@@ -14,6 +15,7 @@ export async function sendOTP(email) {
 }
 
 export async function verifyOTP(email, code) {
+  
   const res = await axios
     .post(`${baseURL}mail/${code}`, { email })
     .then((res) => res.data)
@@ -108,4 +110,11 @@ export async function editUser(email, body) {
 	const res = await axios.patch(`${baseURL}auth/edit/${email}`, {...body}, {headers}).then(res=> res.data).catch((error)=> error.response.data);
 	console.log(res);
 	return res;
+}
+
+export async function changePwd(body){
+  console.log(body);
+  const res = await axios.patch(`${baseURL}mail/findpassword`, {...body}).then(res=> res.data).catch((error)=> error.response.data);
+  console.log(res);
+  return res;
 }

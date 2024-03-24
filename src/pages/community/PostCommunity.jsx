@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import styles from '../styles/community/postCommunity.module.css';
-import { postCommunity } from '../api/community';
+import styles from '../../styles/community/postCommunity.module.css';
+import { postCommunity } from '../../api/community';
 import { useNavigate } from 'react-router-dom';
-import useCommunity from '../hooks/useCommunity';
+import useCommunity from '../../hooks/useCommunity';
 
 export default function PostCommunity() {
   const [post, setPost] = useState({ category: 'QUESTION' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const {addPost} = useCommunity();
+  const { addPost } = useCommunity();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPost((po) => ({ ...po, [name]: value }));
@@ -19,12 +19,11 @@ export default function PostCommunity() {
     console.log(post);
 
     // const res = await postCommunity(post);
-    const res = await addPost.mutateAsync({post})
+    const res = await addPost.mutateAsync({ post });
     console.log(res);
-    if(res.error){
-      setError(res.message)
-    }
-    else{
+    if (res.error) {
+      setError(res.message);
+    } else {
       navigate('/community');
     }
   };

@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useCommunity from '../hooks/useCommunity';
+import useCommunity from '../../hooks/useCommunity';
 
 export default function CommunityEdit() {
-	const{state: {post}} = useLocation();
-	const [ePost, setEPost] = useState({category: post.category, title: post.title, content: post.content})
-	const [error, setError] = useState(null);
-	const navigate = useNavigate();
-	const {updatePost} = useCommunity();
-	console.log(ePost);
-	const handleChange = (e) => {
+  const {
+    state: { post },
+  } = useLocation();
+  const [ePost, setEPost] = useState({
+    category: post.category,
+    title: post.title,
+    content: post.content,
+  });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const { updatePost } = useCommunity();
+  console.log(ePost);
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setEPost((po) => ({ ...po, [name]: value }));
     console.log(ePost);
@@ -19,17 +25,16 @@ export default function CommunityEdit() {
     console.log(post);
 
     // const res = await postCommunity(post);
-    const res = await updatePost.mutateAsync({id: post.id, ePost})
+    const res = await updatePost.mutateAsync({ id: post.id, ePost });
     console.log(res);
-    if(res.error){
-      setError(res.message)
-    }
-    else{
+    if (res.error) {
+      setError(res.message);
+    } else {
       navigate('/community');
     }
   };
-	return (
-		<section>
+  return (
+    <section>
       Write
       <form onSubmit={handleSubmit}>
         <label htmlFor=''>Category</label>
@@ -66,6 +71,5 @@ export default function CommunityEdit() {
         {error && <p>{Array.isArray(error) ? error[0] : error}</p>}
       </form>
     </section>
-	);
+  );
 }
-

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 import { useCountries } from 'use-react-countries';
 import { useNavigate } from 'react-router-dom';
-import { editUser, getUser, register } from '../api/authClient';
-import styles from '../styles/profile/profile.module.css';
+import { editUser, getUser, register } from '../../api/authClient';
+import styles from '../../styles/profile/profile.module.css';
 
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
@@ -208,8 +208,7 @@ export default function Profile() {
             ))}
           </select>
 
-          <button
-          className={styles.btn}>Change</button>
+          <button className={styles.btn}>Change</button>
           {error && <p>{Array.isArray(error) ? error[0] : error}</p>}
           {msg && <p>{msg}</p>}
         </div>
@@ -253,9 +252,9 @@ export default function Profile() {
             onBlur={checkPwd}
           />
         </label>
-        <button 
-        className={styles.btn}
-        disabled={disabledBtn}>Change Change</button>
+        <button className={styles.btn} disabled={disabledBtn}>
+          Change Password
+        </button>
         {pwdError && <p>{Array.isArray(pwdError) ? pwdError[0] : pwdError}</p>}
       </form>
     </section>

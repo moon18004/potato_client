@@ -37,7 +37,7 @@ export default function CommunityPosts() {
     { id: 5, name: 'ETC', content: 'Etc' },
   ];
 
-  console.log(crucials);
+  // console.log(crucials);
   return (
     <>
       {isLoading && <p>Loading...</p>}

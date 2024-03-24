@@ -7,6 +7,9 @@
   --color-purple: #69385c;
   
 }
+h2, label{
+  font-family: "Archivo", sans-serif;
+}
 /* base */
 h1{
   font-family: "Archivo", sans-serif;

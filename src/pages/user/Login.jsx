@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { login } from '../api/authClient';
+import { login } from '../../api/authClient';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
-import { useOutletContext } from "react-router-dom";
+import { useAuthContext } from '../../context/AuthContext';
+import { useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [user, setUser] = useState({});
-	const navigate = useNavigate();
-	const {verified, setVerified, setUserVerified} = useAuthContext();
+  const navigate = useNavigate();
+  const { verified, setVerified, setUserVerified } = useAuthContext();
   // const [verified, setVerified] = useOutletContext();
 
   const handleChange = (e) => {
@@ -19,16 +20,15 @@ export default function Login() {
     e.preventDefault();
     const token = `${user.email}:${user.password}`;
     const encoded = btoa(token);
-		const res = await login(encoded);
-		if(!res.error){
-			// setVerified(true);
+    const res = await login(encoded);
+    if (!res.error) {
+      // setVerified(true);
       setUserVerified();
       // console.log(verified);
-			navigate('/');
-		}
-		else{
-			alert(res.message);
-		}
+      navigate('/');
+    } else {
+      alert(res.message);
+    }
   };
 
   return (
@@ -59,6 +59,7 @@ export default function Login() {
         </label>
         <button>login</button>
       </form>
+      <Link to='/findpassword'>Forgot Password?</Link>
     </section>
   );
 }

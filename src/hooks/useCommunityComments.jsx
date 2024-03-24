@@ -17,7 +17,7 @@ export default function useCommunityComments(postId){
 	})
 
 	const deleteComment = useMutation({
-		mutationFn: (id) => removeComment(id),
+		mutationFn: (id) => removeComment(id, postId),
 		onSuccess:()=> queryClient.invalidateQueries(['comments', postId])
 	})
 

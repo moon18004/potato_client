@@ -23,13 +23,13 @@ export async function postCommunityComment(id, comment) {
 	return res;
 }
 
-export async function removeComment(id){
+export async function removeComment(id, postId){
 	const accessToken = localStorage.getItem('accessToken');
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
 	const res = await axios
-    .delete(`${baseURL}postsComments/${id}`, { headers })
+    .delete(`${baseURL}postsComments/${id}`, { headers, data: {postId} })
     .then((res) => res.data)
     .catch((error) => error.response.data);
   return res;

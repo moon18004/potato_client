@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/register.module.css';
+import styles from '../../styles/register/register.module.css';
 import { useCountries } from 'use-react-countries';
-import { register, sendOTP, verifyOTP } from '../api/authClient';
+import { register, sendOTP, verifyOTP } from '../../api/authClient';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
-import { useOutletContext } from "react-router-dom";
+import { useAuthContext } from '../../context/AuthContext';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import { useOutletContext } from 'react-router-dom';
+import { TextField } from '@mui/material';
+
 export default function Register() {
   const [userInfo, setUserInfo] = useState({});
   const [code, setCode] = useState('');
   const [disabledEmail, setDisabledEmail] = useState(false);
-  const [tokenPassed, settokenPassed] = useState(false);
-  const [sentEmail, setSentEmail] = useState(false);
+  const [tokenPassed, settokenPassed] = useState(true); // false
+  const [sentEmail, setSentEmail] = useState(true); //false
   const [error, setError] = useState(null);
-  const {setVerified} = useAuthContext();
+  const { setVerified, setUserVerified } = useAuthContext();
+  const [codeError, setCodeError] = useState(false);
+  const [disabledCode, setDisabledCode] = useState(false);
+  const [emailError, setEmailError] = useState(null);
+
   // const [setVerified] = useOutletContext();
 
   const { countries } = useCountries();
@@ -33,6 +43,9 @@ export default function Register() {
     }
     return 0;
   });
+  // console.log(countries);
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,8 +60,7 @@ export default function Register() {
     } else {
       setUserInfo((info) => ({ ...info, [name]: value }));
     }
-
-    // console.log(userInfo);
+    console.log(JSON.stringify({name: userInfo.country, countryUrl: userInfo.countryUrl}));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,8 +68,9 @@ export default function Register() {
 
     const res = await register(userInfo);
     if (!res.error) {
+      setUserVerified();
       setError(null);
-      setVerified(true)
+      setVerified(true);
       navigate('/');
     } else {
       setError(res.message);
@@ -66,10 +79,14 @@ export default function Register() {
   };
   const sendCode = async (e) => {
     console.log('send cdoe');
+    // console.log(userInfo.email);
     const res = await sendOTP(userInfo.email);
     if (!res.error) {
       setSentEmail(res);
       setDisabledEmail(true);
+      setEmailError(null);
+    } else {
+      setEmailError(res.message);
     }
   };
   const handleCode = (e) => {
@@ -80,6 +97,10 @@ export default function Register() {
     console.log(res);
     if (!res.error) {
       settokenPassed(res);
+      setCodeError(false);
+      setDisabledCode(true);
+    } else {
+      setCodeError(true);
     }
   };
   const checkPwd = () => {
@@ -92,8 +113,8 @@ export default function Register() {
   };
 
   return (
-    <section>
-      Register
+    <section className={styles.register}>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor=''>
           Email:
@@ -109,6 +130,7 @@ export default function Register() {
         </label>
         <p className={styles.sendCode} onClick={sendCode}>
           Send Verification Code
+          <span className={styles.emailErrMsg}>{emailError}</span>
         </p>
 
         <div className={`${sentEmail ? styles.visible : styles.unvisible}`}>
@@ -121,13 +143,34 @@ export default function Register() {
               placeholder='6 digits'
               required
               onChange={handleCode}
+              disabled={disabledCode}
             />
           </label>
           <p className={styles.verify} onClick={verifyCode}>
-            Verify Code
+            Verify Code{' '}
+            <span className={styles.codeErrMsg}>
+              {codeError ? 'Code is not correct' : ''}
+            </span>
           </p>
         </div>
-        <div className={tokenPassed ? styles.visible : styles.unvisible}>
+        <div
+          // className={`${styles.addtional} ${
+          //   tokenPassed ? styles.visible : styles.unvisible
+          // }`}>
+          className={tokenPassed ? styles.visible : styles.unvisible}>
+          {/* <TextField
+            required
+            id='outlined-password-input'
+            label='Password'
+            variant='outlined'
+            type='password'
+            name='password'
+            value={userInfo.password ?? ''}
+            placeholder='password'
+            onChange={handleChange}
+            onBlur={checkPwd}
+          /> */}
+
           <label htmlFor=''>
             Password
             <input
@@ -136,6 +179,7 @@ export default function Register() {
               value={userInfo.password ?? ''}
               placeholder='password'
               required
+              autoComplete='new-password'
               onChange={handleChange}
               onBlur={checkPwd}
             />
@@ -145,6 +189,7 @@ export default function Register() {
             <input
               type='password'
               name='confirmPwd'
+              autoComplete='new-password'
               value={userInfo.confirmPwd ?? ''}
               placeholder='Confirm password'
               required
@@ -174,21 +219,42 @@ export default function Register() {
               onChange={handleChange}
             />
           </label>
+          <FormControl fullWidth>
+            <InputLabel id='countries-label'>Choose your country</InputLabel>
+            <Select
+              name='countries'
+              id=''
+              label='Choose your country'
+              value={userInfo.country ? JSON.stringify({name: userInfo.country, countryUrl: userInfo.countryUrl}) : ''}
+              onChange={handleChange}>
+              
+              {countries.map(({ name, flags }) => (
+                <MenuItem
+                  key={name}
+                  value={JSON.stringify({ name, countryUrl: flags.png })}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-          <select name='countries' id='' onChange={handleChange}>
-            <option key='00' value=''>
-              --Please choose your country
-            </option>
-            {countries.map(({ name, flags, area }) => (
-              <option
-                key={name}
-                value={JSON.stringify({ name, countryUrl: flags.png })}>
-                {name}
+          {/* <label>
+            Country
+            <select name='countries' id='' onChange={handleChange}>
+              <option key='00' value=''>
+                --Please choose your country
               </option>
-            ))}
-          </select>
-          {error && <p>{Array.isArray(error)? error[0] : error}</p>}
-          <button>submit</button>
+              {countries.map(({ name, flags, area }) => (
+                <option
+                  key={name}
+                  value={JSON.stringify({ name, countryUrl: flags.png })}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </label> */}
+          {error && <p>{Array.isArray(error) ? error[0] : error}</p>}
+          <button className={styles.btn}>Register</button>
         </div>
       </form>
     </section>
